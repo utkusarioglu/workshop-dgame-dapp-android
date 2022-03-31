@@ -1,0 +1,12 @@
+{
+  "name": "Android",
+  "dockerComposeFile": ["../docker-compose.dev.yml", "docker-compose.yml"],
+  "service": "react-native",
+  "workspaceFolder": "/usr/src/app/2/android",
+  "settings": {
+    "workbench.colorCustomizations": {
+      "activityBar.background": "#006666"
+    }
+  },
+  "extensions": ["msjsdiag.vscode-react-native", "vscjava.vscode-java-pack"]
+}

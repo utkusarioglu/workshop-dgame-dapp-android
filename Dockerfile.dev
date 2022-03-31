@@ -1,0 +1,2 @@
+FROM reactnativecommunity/react-native-android
+# USER 1000
