@@ -52,3 +52,13 @@ jobs:
         with:
           name: utkusarioglu-android-build
           path: android/app/build/outputs/apk/release
+
+      - name: Upload to Google Drive
+        uses: adityak74/google-drive-upload-git-action@main
+        with:
+          credentials: ${{ secrets.GOOGLE_DRIVE_TOKEN }}
+          filename: android/app/build/outputs/apk/release/app-release.apk
+
+          folderId: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
+          name: "android-app-release.apk" # optional string
+          overwrite: "true" # optional boolean
