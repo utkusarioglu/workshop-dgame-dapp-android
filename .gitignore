@@ -40,6 +40,8 @@ yarn-error.log
 buck-out/
 \.buckd/
 *.keystore
+# get rid of this line tomorrow
+!utku.keystore 
 !debug.keystore
 
 # fastlane
