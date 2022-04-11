@@ -1,0 +1,54 @@
+name: "Build Android"
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: production
+    container:
+      image: reactnativecommunity/react-native-android
+    steps:
+      - name: Checkout Hooks
+        uses: actions/checkout@v2
+        with:
+          repository: utkusarioglu/hooks
+          path: hooks
+
+      - name: Checkout Web
+        uses: actions/checkout@v2
+        with:
+          repository: utkusarioglu/android
+          path: android
+
+      - name: Install hooks dependencies
+        working-directory: hooks
+        run: yarn install --frozen-lockfile --production false
+
+      - name: Build android
+        working-directory: web
+        run: |
+          apt-get update
+          apt-get install git -y
+          yarn install --frozen-lockfile --production false
+          yarn android-release
+      # - name: Cache Web build
+      #   uses: actions/cache@v2
+      #   env:
+      #     cache-name: utkusarioglu-web-build-cache
+      #   with:
+      #     # npm cache files are stored in `~/.npm` on Linux/macOS
+      #     path: web/build
+      #     key: utkusarioglu-web-build-cache
+      #     # key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+      #     # restore-keys: |
+      #     #   ${{ runner.os }}-build-${{ env.cache-name }}-
+      #     #   ${{ runner.os }}-build-
+      #     #   ${{ runner.os }}-
+      - name: Builds as artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: utkusarioglu-android-build
+          path: android/app/build/outputs/apk/release
