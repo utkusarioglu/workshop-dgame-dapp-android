@@ -44,7 +44,7 @@ jobs:
         with:
           credentials: ${{ secrets.GOOGLE_DRIVE_TOKEN }}
           # filename: android/app/build/outputs/apk/release/app-release.apk
-          filename: android/app/build/outputs/bundle/release/app-release.aab
+          filename: android/android/app/build/outputs/bundle/release/app-release.aab
           folderId: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
           # name: "android-app-release.aab" # optional string
           overwrite: "true" # optional boolean
@@ -54,4 +54,4 @@ jobs:
         with:
           name: utkusarioglu-android-build
           # path: android/app/build/outputs/apk/release
-          path: android/app/build/outputs/bundle/release
+          path: android/android/app/build/outputs/bundle/release
