@@ -11,13 +11,13 @@ jobs:
     container:
       image: reactnativecommunity/react-native-android
     steps:
-      - name: Checkout Hooks
+      - name: Checkout hooks
         uses: actions/checkout@v2
         with:
           repository: utkusarioglu/hooks
           path: hooks
 
-      - name: Checkout Web
+      - name: Checkout android
         uses: actions/checkout@v2
         with:
           repository: utkusarioglu/android
@@ -28,7 +28,7 @@ jobs:
         run: yarn install --frozen-lockfile --production false
 
       - name: Build android
-        working-directory: web
+        working-directory: android
         run: |
           apt-get update
           apt-get install git -y
