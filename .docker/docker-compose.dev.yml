@@ -3,7 +3,9 @@ version: "3.9"
 services:
   react-native:
     build:
+      context: ..
       dockerfile: Dockerfile.dev
     volumes:
-      - ../:/usr/src/app/2
+      - ..:/usr/src/app/2/android
+      - ../../hooks:/usr/src/app/2/hooks
     # network_mode: host
