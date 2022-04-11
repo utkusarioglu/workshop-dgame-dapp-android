@@ -39,13 +39,6 @@ jobs:
         run: |
           yarn ci
 
-      - name: Builds as artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: utkusarioglu-android-build
-          # path: android/app/build/outputs/apk/release
-          filename: android/app/build/outputs/bundle/release
-
       - name: Upload to Google Drive
         uses: adityak74/google-drive-upload-git-action@main
         with:
@@ -55,3 +48,10 @@ jobs:
           folderId: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
           # name: "android-app-release.aab" # optional string
           overwrite: "true" # optional boolean
+
+      - name: Builds as artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: utkusarioglu-android-build
+          # path: android/app/build/outputs/apk/release
+          path: android/app/build/outputs/bundle/release
