@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import React, { useState } from "react";
+import React, { useState, createRef } from "react";
 import {
   View,
   Text,
@@ -17,6 +17,7 @@ type LoginFormViewProps = {
 };
 
 const LoginFormView: FC<LoginFormViewProps> = ({ updateGreeting }) => {
+  const passwordInputRef = createRef<TextInput>();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [login, tryLogin, setIdle] = useFakeLogin();
@@ -71,8 +72,13 @@ const LoginFormView: FC<LoginFormViewProps> = ({ updateGreeting }) => {
           autoComplete="username"
           textContentType="username"
           returnKeyType="next"
+          keyboardType="email-address"
+          onSubmitEditing={() => {
+            passwordInputRef.current?.focus();
+          }}
         />
         <TextInput
+          ref={passwordInputRef}
           style={styles.textInput}
           onChangeText={passwordOnChangeText}
           value={password}
@@ -82,6 +88,8 @@ const LoginFormView: FC<LoginFormViewProps> = ({ updateGreeting }) => {
           textContentType="password"
           returnKeyType="next"
           secureTextEntry
+          keyboardType="number-pad"
+          onSubmitEditing={loginButtonOnPress}
         />
         <Pressable onPress={loginButtonOnPress}>
           <View

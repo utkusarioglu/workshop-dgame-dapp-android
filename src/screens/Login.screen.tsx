@@ -48,6 +48,7 @@ const LoginScreen: FC<LoginScreenProps> = ({
   );
 };
 
+// positioning of "go back" is hacky on low height screens
 const styles = StyleSheet.create({
   container: { flex: 1 },
   headerSection: {
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     justifyContent: "center",
     padding: 20,
+    marginBottom: 40,
   },
   bottomSection: {
     flex: 1,
@@ -72,6 +74,7 @@ const styles = StyleSheet.create({
   goBackButton: {},
   goBackButtonText: {
     textAlign: "center",
+    padding: 10,
   },
 });
 

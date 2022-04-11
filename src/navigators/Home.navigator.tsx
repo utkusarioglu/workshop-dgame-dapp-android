@@ -3,10 +3,10 @@ import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import type { FC } from "react";
 import type { RootStackParamsList } from "../app.types";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import FakeApiScreen from "../screens/FakeApi.screen";
 import EthereumBlocksScreen from "../screens/EthereumBlocks.screen";
 import CameraScreen from "../screens/Camera.screen";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import FakePostsNavigator from "./FakePosts.navigator";
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParamsList, "Home">;
 export type HomeNavigatorParamsList = {
@@ -53,8 +53,8 @@ const HomeNavigator: FC<HomeScreenProps> = ({ navigation, route: {} }) => {
       })}>
       <Tab.Screen
         name="FakeApi"
-        component={FakeApiScreen}
-        options={{ title: "Fake Posts" }}
+        component={FakePostsNavigator}
+        options={{ title: "Fake Posts", headerShown: false }}
       />
       <Tab.Screen
         name="EthereumBlocks"

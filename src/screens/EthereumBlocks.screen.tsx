@@ -7,8 +7,6 @@ import EthereumBlocksView from "src/views/EthereumBlocks.view";
 const EthereumBlocksScreen = () => {
   const [notificationId, setNotificationId] = useState("");
   const [notificationCount, setNotificationCount] = useState(1);
-  const titleOnPress = () => {};
-  const colorOnPress = () => {};
 
   async function createChannel() {
     const channelId = await notifee.createChannel({
@@ -18,13 +16,13 @@ const EthereumBlocksScreen = () => {
     return channelId;
   }
 
-  async function displayNotificationOnClick() {
+  async function displayNotificationOnClick(title: string, body: string) {
     // Create a channel
     const channelId = await createChannel();
     // Display a notification
     const id = await notifee.displayNotification({
-      title: "Notification Title",
-      body: "Main body content of the notification",
+      title,
+      body,
       android: {
         channelId,
         smallIcon: "ic_launcher", // optional, defaults to 'ic_launcher'.
@@ -58,7 +56,13 @@ const EthereumBlocksScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={displayNotificationOnClick}>
+      <Pressable
+        onPress={() =>
+          displayNotificationOnClick(
+            "click notification",
+            "You're seeing this because you clicked stuff",
+          )
+        }>
         <View style={styles.button}>
           <Text>Create notification</Text>
         </View>
@@ -73,16 +77,6 @@ const EthereumBlocksScreen = () => {
           <Text>Cancel notification</Text>
         </View>
       </Pressable>
-      {/* <Pressable onPress={titleOnPress}>
-        <View style={styles.button}>
-          <Text>Update title</Text>
-        </View>
-      </Pressable>
-      <Pressable onPress={colorOnPress}>
-        <View style={styles.button}>
-          <Text>Update tint color</Text>
-        </View>
-      </Pressable> */}
       <EthereumBlocksView />
     </View>
   );

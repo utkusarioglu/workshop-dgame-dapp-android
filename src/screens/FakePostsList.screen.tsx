@@ -1,14 +1,17 @@
 import React from "react";
 import type { FC } from "react";
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { View, Text, Pressable, StyleSheet, Alert } from "react-native";
 import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import type { HomeNavigatorParamsList } from "../navigators/Home.navigator";
 import FakePostsView from "../views/FakePosts.view";
-import { useNavigation } from "@react-navigation/native";
+import { logout } from "../slices/user.slice";
 
-type Home1ScreenProps = BottomTabScreenProps<HomeNavigatorParamsList, "Home 1">;
+type FakePostsListScreenProps = BottomTabScreenProps<
+  HomeNavigatorParamsList,
+  "FakeApi"
+>;
 
-const FakeApiScreen: FC<Home1ScreenProps> = ({ navigation }) => {
+const FakeApiScreen: FC<FakePostsListScreenProps> = ({ navigation }) => {
   return (
     <View>
       <LogoutButton />
@@ -18,11 +21,11 @@ const FakeApiScreen: FC<Home1ScreenProps> = ({ navigation }) => {
 };
 
 const LogoutButton = () => {
-  const navigation = useNavigation();
   const logoutOnPress = () => {
-    navigation
-      .getParent()
-      ?.navigate("Login", { greeting: "You have logged out, like a coward" });
+    Alert.alert("Logout", "Are you sure?", [
+      { text: "Cancel", style: "cancel" },
+      { text: "Log me out!", style: "default", onPress: logout },
+    ]);
   };
   return (
     <Pressable onPress={logoutOnPress}>

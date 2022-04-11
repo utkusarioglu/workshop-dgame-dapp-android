@@ -1,8 +1,10 @@
 import type { BlockWithTransactions } from "@ethersproject/abstract-provider";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import type { FC } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import { useEthereumBlocks, toEth } from "hooks";
+import notifee from "@notifee/react-native";
+import { useNavigation } from "@react-navigation/native";
 
 type BlockCardProps = { item: BlockWithTransactions };
 
@@ -30,7 +32,39 @@ const BlockCard: FC<BlockCardProps> = ({
 };
 
 const EthereumBlocksView = () => {
+  const navigation = useNavigation();
   const blocks = useEthereumBlocks();
+
+  useEffect(() => {
+    async function createChannel() {
+      return await notifee.createChannel({
+        id: "ethereum",
+        name: "Ethereum channel",
+      });
+    }
+
+    navigation.addListener("blur", async () => {
+      const channelId = await createChannel();
+      await notifee.displayNotification({
+        title: "Ethereum blur",
+        body: "You have blurred from ethereum blocks",
+        android: {
+          channelId,
+          smallIcon: "ic_launcher",
+          largeIcon:
+            "https://pbs.twimg.com/profile_images/722171193323884544/UNH4KybP_400x400.jpg",
+          actions: [
+            {
+              title: "<b>H</b>op",
+              pressAction: {
+                id: "hop",
+              },
+            },
+          ],
+        },
+      });
+    });
+  }, []);
 
   return (
     <View style={styles.container}>
