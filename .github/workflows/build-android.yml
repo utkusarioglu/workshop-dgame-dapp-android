@@ -43,15 +43,13 @@ jobs:
         uses: adityak74/google-drive-upload-git-action@main
         with:
           credentials: ${{ secrets.GOOGLE_DRIVE_TOKEN }}
-          # filename: android/app/build/outputs/apk/release/app-release.apk
-          filename: android/android/app/build/outputs/bundle/release/app-release.aab
+          filename: 
+          filename: android/android/app/build/outputs/apk/release/app-release.apk
           folderId: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
-          # name: "android-app-release.aab" # optional string
-          overwrite: "true" # optional boolean
+          overwrite: "true" 
 
       - name: Builds as artifacts
         uses: actions/upload-artifact@v3
         with:
           name: utkusarioglu-android-build
-          # path: android/app/build/outputs/apk/release
-          path: android/android/app/build/outputs/bundle/release
+          path: android/android/app/build/outputs/apk/release
