@@ -43,7 +43,6 @@ jobs:
         uses: adityak74/google-drive-upload-git-action@main
         with:
           credentials: ${{ secrets.GOOGLE_DRIVE_TOKEN }}
-          filename: 
           filename: android/android/app/build/outputs/apk/release/app-release.apk
           folderId: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
           overwrite: "true" 
