@@ -4,7 +4,7 @@ services:
   react-native:
     build:
       context: ..
-      dockerfile: Dockerfile.dev
+      dockerfile: .docker/Dockerfile.dev
     volumes:
       - ..:/usr/src/app/2/android
       - ../../hooks:/usr/src/app/2/hooks
